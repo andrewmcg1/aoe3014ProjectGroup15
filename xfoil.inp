@@ -1,7 +1,12 @@
 naca 2412
 ppar
+T
+0.2
+
+
+ppar
 n
-100
+80
 
 
 oper
@@ -18,6 +23,21 @@ visc
 pacc
 
 
+alfa -5
+dump xfoil_a-5.000_dump.dat
+cpwr xfoil_a-5.000_cpwr.dat
+alfa -4
+dump xfoil_a-4.000_dump.dat
+cpwr xfoil_a-4.000_cpwr.dat
+alfa -3
+dump xfoil_a-3.000_dump.dat
+cpwr xfoil_a-3.000_cpwr.dat
+alfa -2
+dump xfoil_a-2.000_dump.dat
+cpwr xfoil_a-2.000_cpwr.dat
+alfa -1
+dump xfoil_a-1.000_dump.dat
+cpwr xfoil_a-1.000_cpwr.dat
 alfa 0
 dump xfoil_a00.000_dump.dat
 cpwr xfoil_a00.000_cpwr.dat

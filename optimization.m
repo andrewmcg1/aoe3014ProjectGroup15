@@ -1,12 +1,12 @@
 
 
 params = [2, 4, 12, 10, 120, .3];
-% fuel_mass_4series(params)
+fuel_mass_4series(params)
 
 min_guess = [0, 0, 11, 5, 50, 0];
 max_guess = [9, 9, 30, 50, 250, 1];
 
-a = fmincon(@fuel_mass_4series, params, [], [], [], [], min_guess, max_guess, @constraint)
+%a = fmincon(@fuel_mass_4series, params, [], [], [], [], min_guess, max_guess, @constraint)
 
 function E_co2 = fuel_mass_4series(v)
     global cl
@@ -27,7 +27,7 @@ function E_co2 = fuel_mass_4series(v)
     rho_inf = 0.4135; % density of air at 35,000 ft in kg/m^3
     g = 9.81; % gravity
 
-    range_act = 5837;
+    range_act = 5837*1000;
     cruise_alt = 35000;
     cruise_mach = .65;
     n_t = 43.10;
@@ -43,7 +43,7 @@ function E_co2 = fuel_mass_4series(v)
     Re = rho_inf * velocity * c / viscosity % Reynolds number
 
     airfoil = append('NACA', int2str(NACA1), int2str(NACA2), sprintf('%02d', NACA34));
-    [pol foil] = xfoil(airfoil,alpha,Re,cruise_mach,'ppar n 100','oper iter 200');
+    [pol foil] = xfoil(airfoil,alpha,Re,cruise_mach,'ppar T 0.2', 'ppar n 80','oper iter 200');
 
     CL = pol.CL * n;
     CD = pol.CD + CL.^2 / (pi * span_e * AR);
@@ -59,7 +59,7 @@ function E_co2 = fuel_mass_4series(v)
     L = CL * 0.5 * rho_inf * (cruise_mach * speed_sound)^2 * Sw;
 
     thickness = NACA34 / 100;
-    W_wing = 228 * AR * Sw^(0.5) * (thickness)^(-0.04);
+    W_wing = (228 * AR * (Sw*10.764)^(0.5) * (thickness)^(-0.04)) * 4.4482216153;
 
     w1 = wb + W_wing;
     w0 = L;
@@ -92,7 +92,7 @@ function [cc,ceq] = constraint(v)
     rho_inf = 0.4135; % density of air at 35,000 ft in kg/m^3
     g = 9.81; % gravity
 
-    range_act = 5837;
+    range_act = 5837*1000;
     cruise_alt = 35000;
     cruise_mach = .65;
     n_t = 43.10;
@@ -114,7 +114,7 @@ function [cc,ceq] = constraint(v)
     L = CL * 0.5 * rho_inf * (cruise_mach * speed_sound)^2 * Sw;
 
     thickness = NACA34 / 100;
-    W_wing = 228 * AR * Sw^(0.5) * (thickness)^(-0.04);
+    W_wing = (228 * AR * (Sw*10.764)^(0.5) * (thickness)^(-0.04)) * 4.4482216153;
 
     w1 = wb + W_wing;
     w0 = L;
