@@ -49,7 +49,7 @@ function E_co2 = fuel_mass_4series(v)
     cl = pol.CL;
     cd = pol.CD;
 
-    b = fmincon(@solveSpan, 100, [], [], [], [], 50, 250);
+    b = fmincon(@solveSpan, 100, [], [], [], [], 50, 250)
     if L >= w0*(1-1e-5)
         LS_f = (89 - 30 * fuel_frac); % lifetime emissions
         Sw = b * c;
