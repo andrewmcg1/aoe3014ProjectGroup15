@@ -82,6 +82,8 @@ Change what ? (<cr> if nothing else)   c>
 
  Maximum panel corner angle =  7.887   at  i,x,y  =  85   0.0007  -0.0044
 
+ X-window size changed to   4.87" x  8.50"
+
     Present paneling parameters...
   N  i   Number of panel nodes       160
   P  r   Panel bunching parameter    1.000
