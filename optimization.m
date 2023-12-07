@@ -2,6 +2,8 @@
 % input [NACA-1st digit, NACA-2nd digit, NACA-3rd and 4th digits, chord length, fuel fraction]
 params = [2, 4, 12, 10, .33];
 % solves for a span that satisfies all constraints (not pressure constraint)
+% returns the the value of the emitted CO2, if returned value is Inf, then
+% the input parameters are not possible
 fuel_mass_4series(params)
 
 min_guess = [0, 0, 11, 3, 0];
@@ -66,16 +68,6 @@ function E_co2 = fuel_mass_4series(v)
         d_hf = (42.8 - 20 * fuel_frac^2);
         range = d_hf/9.81 * n_t * LpD * log(w0/w1);
         E_co2 = M_fuel * FCF *(LS_f / LC);
-
-        airfoil
-        fuel_frac
-        E_co2
-        range
-        w1
-        w0
-        L
-        b
-        c
     else
         E_co2 = Inf;
     end
