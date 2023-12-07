@@ -1,12 +1,12 @@
 
-
+% input [NACA-1st digit, NACA-2nd digit, NACA-3rd and 4th digits, chord length, fuel fraction]
 params = [2, 4, 12, 10, .33];
+% solves for a span that satisfies all constraints (not pressure constraint)
 fuel_mass_4series(params)
 
 min_guess = [0, 0, 11, 3, 0];
 max_guess = [9, 9, 30, 50, 1];
 
-%a = fmincon(@fuel_mass_4series, params, [], [], [], [], min_guess, max_guess, @constraint)
 %a = fmincon(@fuel_mass_4series, params, [], [], [], [], min_guess, max_guess)
 
 function E_co2 = fuel_mass_4series(v)
