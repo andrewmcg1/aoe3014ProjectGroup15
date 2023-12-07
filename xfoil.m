@@ -159,7 +159,7 @@ else
   fclose(fid);
 
   % execute xfoil
-  cmd = sprintf('cd %s && xfoil < xfoil.inp > xfoil.out',wd);
+  cmd = sprintf('cd %s && xfoil.exe < xfoil.inp > xfoil.out',wd);
   [status,result] = system(cmd);
   if (status~=0),
     disp(result);
