@@ -41,15 +41,17 @@ function E_co2 = fuel_mass_4series(v)
     velocity = cruise_mach * speed_sound;
     viscosity = 1.458e-5;
     Re = rho_inf * velocity * c / viscosity % Reynolds number
-    %Re = 1e6;
+    Re = 1e6;
 
     airfoil = append('NACA', int2str(NACA1), int2str(NACA2), sprintf('%02d', NACA34));
     [pol foil] = xfoil(airfoil,alpha,Re,cruise_mach,'ppar T 0.2', 'ppar n 80','oper iter 10000');
-
+    pol
+    foil
+    
     cl = pol.CL;
     cd = pol.CD;
 
-    b = fmincon(@solveSpan, 100, [], [], [], [], 50, 250);
+    b = fmincon(@solveSpan, 100, [], [], [], [], 50, 250)
     if L >= w0*(1-1e-5)
         LS_f = (89 - 30 * fuel_frac); % lifetime emissions
         Sw = b * c;
